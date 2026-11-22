@@ -1,73 +1,107 @@
+
 # Haftalık Ödev 2 - merhaba.py
 # Kullanıcının adını ve doğum yılını alıp yaşını hesaplayan program
 
-# Bugünün tarihini öğrenmek için datetime modülünden date sınıfını alıyoruz
+# Bugünün tarihini öğrenmek için date sınıfını alıyoruz
 from datetime import date
 
 
-# Kullanıcıdan adını alıp metin (str) olarak döndüren fonksiyon
+# Kullanıcıdan adını alıp str olarak döndüren fonksiyon
 def ad_al() -> str:
-    while True:  # Geçerli bir ad girilene kadar soruyu tekrarlıyoruz
-        # Adı okuyup baştaki ve sondaki boşlukları siliyoruz
+    while True:
+        # Kullanıcının adını alıp boşlukları temizliyoruz
         ad = input("Adınız: ").strip()
-        if ad:  # Ad boş değilse
-            return ad  # Adı fonksiyonun sonucu olarak geri veriyoruz
-        print("Uyarı: Ad boş bırakılamaz.")  # Boşsa uyarıp tekrar soruyoruz
+
+        if ad:
+            return ad  # Ad boş değilse geri döndürüyoruz
+
+        print("Uyarı: Ad boş bırakılamaz.")
 
 
-# Kullanıcıdan doğum yılını alıp tam sayı (int) olarak döndüren fonksiyon
-def dogum_yili_al() -> int:
-    while True:  # Geçerli bir yıl girilene kadar soruyu tekrarlıyoruz
-        # Girilen yılı önce metin olarak okuyup boşlukları siliyoruz
+# Kullanıcıdan doğum yılını alıp int olarak döndüren fonksiyon
+def dogum_yili_al(bu_yil: int) -> int:
+    while True:
+        # Doğum yılını metin olarak alıp boşlukları siliyoruz
         yil_metni = input("Doğum yılınız: ").strip()
-        try:  # Tam sayıya çevirmeyi deniyoruz; hata çıkabilir
-            dogum_yili = int(yil_metni)  # Metni tam sayıya çeviriyoruz
-        except ValueError:  # Harf, ondalık sayı ya da boş girdi gelirse
-            if not yil_metni:  # Girdi tamamen boşsa
-                print("Uyarı: Doğum yılı boş bırakılamaz.")  # Boş uyarısı
-            else:  # Girdi var ama tam sayı değilse
-                # Doğru biçimi örnekle göstererek uyarıyoruz
+
+        try:
+            # Girilen metni tam sayıya çeviriyoruz
+            dogum_yili = int(yil_metni)
+
+        except ValueError:
+            # Boş veya geçersiz girişleri kontrol ediyoruz
+            if not yil_metni:
+                print("Uyarı: Doğum yılı boş bırakılamaz.")
+            else:
                 print("Uyarı: Doğum yılı tam sayı olmalı (örnek: 2003).")
-            continue  # Döngünün başına dönüp yılı yeniden soruyoruz
-        return dogum_yili  # Çeviri başarılıysa yılı geri veriyoruz
+            continue
+
+        # Doğum yılının 1900'den küçük olup olmadığını kontrol ediyoruz
+        if dogum_yili < 1900:
+            print("Uyarı: Doğum yılı 1900'den küçük olamaz.")
+            continue
+
+        # Gelecek bir yıl girilip girilmediğini kontrol ediyoruz
+        if dogum_yili > bu_yil:
+            print("Uyarı: Gelecek bir yıl girilemez.")
+            continue
+
+        return dogum_yili  # Geçerli yılı geri döndürüyoruz
 
 
-# Doğum yılı ile bu yılın farkından yaşı bulan fonksiyon
+# Doğum yılı ile mevcut yılın farkından yaşı hesaplıyoruz
 def yas_hesapla(dogum_yili: int, bu_yil: int) -> int:
-    return bu_yil - dogum_yili  # Bu yıldan doğum yılını çıkarıp yaşı veriyoruz
+    return bu_yil - dogum_yili
 
 
-# Yaş aralığına göre kişiye özel bir mesaj döndüren fonksiyon
+# Yaş aralığına göre kişiye özel mesaj oluşturuyoruz
 def mesaj_olustur(ad: str, yas: int) -> str:
-    if yas < 18:  # 18 yaşından küçükse
+    if yas < 18:
         return f"{ad}, erken yaşta öğrenmeye başlamak büyük bir avantaj!"
-    elif yas < 26:  # 18-25 yaş arasındaysa
+
+    elif yas < 26:
         return f"{ad}, üniversite yılları yeni beceriler edinmek için harika!"
-    elif yas < 41:  # 26-40 yaş arasındaysa
+
+    elif yas < 41:
         return f"{ad}, iş hayatında kodlama bilgisi sana fark yaratır!"
-    elif yas < 65:  # 41-64 yaş arasındaysa
+
+    elif yas < 65:
         return f"{ad}, deneyimini teknolojiyle birleştirmenin tam zamanı!"
-    else:  # 65 yaş ve üzerindeyse
+
+    else:
         return f"{ad}, öğrenmenin yaşı yok; merakın her şeyden değerli!"
 
 
-def main() -> None:  # Programın ana akışını yöneten fonksiyon
-    print("=== Merhaba! ===")  # Program açılışında bir başlık yazdırıyoruz
-    ad = ad_al()  # Kullanıcının adını alıyoruz
-    dogum_yili = dogum_yili_al()  # Kullanıcının doğum yılını alıyoruz
-    bu_yil = date.today().year  # Bilgisayarın tarihinden bu yılı alıyoruz
-    # Doğum yılı ve bu yılı kullanarak yaşı hesaplıyoruz
+# Programın ana akışını yöneten fonksiyon
+def main() -> None:
+    print("=== Merhaba! ===")
+
+    # Bilgisayarın tarihinden mevcut yılı alıyoruz
+    bu_yil = date.today().year
+
+    # Kullanıcının adını ve doğum yılını alıyoruz
+    ad = ad_al()
+    dogum_yili = dogum_yili_al(bu_yil)
+
+    # Kullanıcının yaşını hesaplıyoruz
     yas = yas_hesapla(dogum_yili, bu_yil)
-    selam = f"Merhaba {ad}!"  # Kişiye adıyla seslenen selamı hazırlıyoruz
-    # Doğum günü geçmemiş olabileceği için iki ihtimali de yazıyoruz
+
+    # Kişiye özel selamlama ve yaş bilgisi hazırlıyoruz
+    selam = f"Merhaba {ad}!"
     yas_metni = f"{bu_yil} yılında {yas} yaşına girdin ya da gireceksin."
-    print(selam, yas_metni)  # Selamı ve yaş bilgisini aynı satırda yazdırıyoruz
-    print(mesaj_olustur(ad, yas))  # Yaşa göre seçilen özel mesajı yazdırıyoruz
+
+    # Selamlama ve yaş bilgisini ekrana yazdırıyoruz
+    print(selam, yas_metni)
+
+    # Yaş aralığına uygun mesajı ekrana yazdırıyoruz
+    print(mesaj_olustur(ad, yas))
 
 
-# Dosya başka bir dosyaya eklenmeden doğrudan çalıştırıldıysa
+# Dosya doğrudan çalıştırıldığında ana fonksiyonu başlatıyoruz
 if __name__ == "__main__":
-    try:  # Kullanıcı programı yarıda keserse hata dökümü göstermemek için
-        main()  # ana fonksiyonu başlatıyoruz
-    except (KeyboardInterrupt, EOFError):  # Ctrl+C ya da Ctrl+D gelirse
-        print("\nProgram sonlandırıldı.")  # Kısa bir kapanış mesajı yazıyoruz
+    try:
+        main()
+
+    except (KeyboardInterrupt, EOFError):
+        # Program yarıda kesilirse kısa bir mesaj gösteriyoruz
+        print("\nProgram sonlandırıldı.")
