@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>İletişim | Fatih Mehmet Ata</title>
+  <meta name="description" content="Fatih Mehmet Ata ile iletişim: e-posta, GitHub ve LinkedIn bağlantıları.">
+  <!-- Kayıtlı tema tercihini sayfa çizilmeden uygular (koyu-açık titremesini önler) -->
+  <script>document.documentElement.classList.add("js");try{if(localStorage.getItem("tema")==="light")document.documentElement.dataset.theme="light"}catch(e){}</script>
+  <link rel="icon" href="img/avatar.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <a class="atla" href="#icerik">İçeriğe geç</a>
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Ana menü">
+      <a href="index.html" class="nav-brand">
+        <img src="img/avatar.svg" alt="" width="36" height="36">
+        <span>Fatih Mehmet Ata</span>
+      </a>
+
+      <button type="button" class="ikon-dugme menu-dugmesi" id="menuDugmesi"
+              aria-label="Menü" aria-expanded="false" aria-controls="navMenu">
+        <span class="cubuk" aria-hidden="true"></span>
+        <span class="cubuk" aria-hidden="true"></span>
+        <span class="cubuk" aria-hidden="true"></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+        <li><a href="hakkimda.html" class="nav-link">Hakkımda</a></li>
+        <li><a href="projeler.html" class="nav-link">Projeler</a></li>
+        <li><a href="iletisim.html" class="nav-link" aria-current="page">İletişim</a></li>
+      </ul>
+
+      <button type="button" class="ikon-dugme tema-dugmesi" id="temaDugmesi">
+        <span class="sr-only tema-etiket">Açık temaya geç</span>
+        <svg class="ikon-gunes" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+        <svg class="ikon-ay" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true" focusable="false">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main id="icerik">
+    <h1>İletişim</h1>
+    <p class="giris">Projelerim ya da iş birliği için bana e-postayla veya aşağıdaki bağlantılardan ulaşabilirsiniz.</p>
+
+    <div class="iletisim-izgara">
+      <section class="kart" aria-labelledby="baglanti-baslik">
+        <h2 id="baglanti-baslik">Bağlantılar</h2>
+        <ul class="bilgi-listesi">
+          <li>
+            <strong>E-posta</strong>
+            <a class="uzun-baglanti" href="mailto:fatihmehmet.ata@bahcesehir.edu.tr">fatihmehmet.ata@bahcesehir.edu.tr</a>
+          </li>
+          <li>
+            <strong>GitHub</strong>
+            <a class="uzun-baglanti" href="https://github.com/34-ata">github.com/34-ata</a>
+          </li>
+          <li>
+            <strong>LinkedIn</strong>
+            <a class="uzun-baglanti" href="https://www.linkedin.com/in/fatih-mehmet-ata-4b9a7b3b2/">linkedin.com/in/fatih-mehmet-ata-4b9a7b3b2</a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="kart" aria-labelledby="form-baslik">
+        <h2 id="form-baslik">Mesaj formu</h2>
+        <p class="form-not">Tüm alanlar zorunludur.</p>
+
+        <!-- Gemini'dan alınan form kodunun uyarlanmış hâli. action yok:
+             gönderim JavaScript ile engellenir, veri hiçbir yere gitmez. -->
+        <form id="iletisimFormu" class="iletisim-formu" novalidate>
+          <div class="form-alani">
+            <label for="ad">Adınız</label>
+            <input type="text" id="ad" name="ad" autocomplete="name" required
+                   aria-describedby="adHata">
+            <p class="hata-mesaji" id="adHata"></p>
+          </div>
+
+          <div class="form-alani">
+            <label for="eposta">E-posta adresiniz</label>
+            <input type="email" id="eposta" name="eposta" autocomplete="email" required
+                   aria-describedby="epostaHata">
+            <p class="hata-mesaji" id="epostaHata"></p>
+          </div>
+
+          <div class="form-alani">
+            <label for="mesaj">Mesajınız</label>
+            <textarea id="mesaj" name="mesaj" rows="5" required
+                      aria-describedby="mesajHata"></textarea>
+            <p class="hata-mesaji" id="mesajHata"></p>
+          </div>
+
+          <!-- JavaScript yüklenene kadar kapalı: JS yokken form adres çubuğuna veri yazmasın -->
+          <button type="submit" class="dugme" id="gonderDugmesi" disabled>Gönder</button>
+          <noscript>
+            <p class="form-not">JavaScript kapalı olduğu için form devre dışı. Bana <a href="mailto:fatihmehmet.ata@bahcesehir.edu.tr">e-posta</a> ile ulaşabilirsiniz.</p>
+          </noscript>
+
+          <div class="form-durumu" id="formDurumu" role="status"></div>
+        </form>
+
+        <section class="aydinlatma" aria-labelledby="aydinlatma-baslik">
+          <h3 id="aydinlatma-baslik">Aydınlatma metni</h3>
+          <p>Bu formda yazdığınız ad, e-posta ve mesaj hiçbir sunucuya ya da üçüncü taraf servise gönderilmez ve kaydedilmez; yalnızca doğru doldurulup doldurulmadığı tarayıcınızda kontrol edilir. Sitede çerez, analiz aracı, harici yazı tipi ya da üçüncü taraf betik kullanılmaz.</p>
+          <p>Seçtiğiniz tema (açık ya da koyu) yalnızca bu tarayıcıda, localStorage içinde "tema" adıyla tutulur ve hiçbir yere gönderilmez. Tarayıcınızın site verilerini temizleyerek bu tercihi silebilirsiniz.</p>
+          <p>Site GitHub Pages üzerinde yayınlanmaktadır; GitHub, sayfa isteklerine ait teknik kayıtları (ör. IP adresi) kendi gizlilik politikası kapsamında tutabilir.</p>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <ul class="footer-baglantilar">
+      <li><a href="https://github.com/34-ata">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/fatih-mehmet-ata-4b9a7b3b2/">LinkedIn</a></li>
+      <li><a href="mailto:fatihmehmet.ata@bahcesehir.edu.tr">E-posta</a></li>
+    </ul>
+    <p>© 2026 Fatih Mehmet Ata · BAU GEP1316 Kodlama Okuryazarlığı</p>
+  </footer>
+</body>
+</html>

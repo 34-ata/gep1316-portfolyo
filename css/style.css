@@ -569,6 +569,109 @@ html:not(.js) .tema-dugmesi {
   margin-top: auto;
 }
 
+/* ===== 5d. İletişim sayfası ve form ===== */
+/* Gemini'dan alınan form stilinin sitenin koyu/açık temasına uyarlanmış hâli */
+.iletisim-izgara {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+
+/* Uzun e-posta ve LinkedIn adresleri dar ekranda taşmasın */
+.uzun-baglanti {
+  overflow-wrap: anywhere;
+}
+
+.form-not {
+  color: var(--soluk);
+  font-size: 0.95rem;
+}
+
+.form-alani {
+  margin-bottom: 1rem;
+}
+
+.form-alani label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.form-alani input,
+.form-alani textarea {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--kenar); /* zemine karşı en az 3:1 */
+  border-radius: 8px;
+  background-color: var(--bg);
+  color: var(--metin);
+  font: inherit;
+}
+
+.form-alani textarea {
+  resize: vertical;
+}
+
+/* outline: none yok; odak çerçevesi genel :focus-visible kuralından gelir */
+.form-alani input:focus,
+.form-alani textarea:focus {
+  border-color: var(--vurgu);
+}
+
+/* Hatalı alan: kalın hata rengi kenar + alttaki yazılı açıklama */
+.form-alani [aria-invalid="true"] {
+  border: 2px solid var(--hata);
+}
+
+.hata-mesaji {
+  min-height: 1.5em;
+  margin: 0.3rem 0 0;
+  color: var(--hata);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.dugme:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Durum kutusu hep sayfada durur (ekran okuyucu değişikliği duyurabilsin);
+   boşken görünmez, mesaj gelince kutu olarak belirir */
+.form-durumu {
+  margin-top: 1rem;
+  border-radius: 8px;
+}
+
+.form-durumu:not(:empty) {
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--kenar);
+  border-left-width: 4px;
+  background-color: var(--bg);
+}
+
+.form-durumu.basari {
+  border-left-color: var(--vurgu);
+}
+
+.form-durumu.hata {
+  border-left-color: var(--hata);
+}
+
+.aydinlatma {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--cizgi);
+  color: var(--soluk);
+  font-size: 0.92rem;
+}
+
+.aydinlatma h3 {
+  color: var(--metin);
+  font-size: 1rem;
+}
+
 /* ===== 6. Alt bilgi ===== */
 .site-footer {
   padding: 1.5rem 1.25rem;
@@ -649,6 +752,10 @@ html:not(.js) .tema-dugmesi {
 
   .proje-listesi {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .iletisim-izgara {
+    grid-template-columns: 1fr 1.6fr;
   }
 }
 

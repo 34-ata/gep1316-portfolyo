@@ -116,7 +116,108 @@ function filtreKur() {
   grup.hidden = false; // JavaScript çalışıyor: filtreyi göster
 }
 
+// ===== 4. Form doğrulama ve 5. gönderim sonrası geri bildirim =====
+// Gemini'dan alınan form kodunun uyarlanmış hâli. Form verisi hiçbir yere
+// gönderilmez ve kaydedilmez; yalnızca tarayıcıda kontrol edilir.
+function formKur() {
+  const form = document.getElementById("iletisimFormu");
+  if (!form) return;
+  const durum = document.getElementById("formDurumu");
+  const gonderDugmesi = document.getElementById("gonderDugmesi");
+  const EPOSTA_KALIBI = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const E_POSTA_ADRESI = "fatihmehmet.ata@bahcesehir.edu.tr";
+
+  // Her alan: girdi öğesi, aria-describedby ile bağlı hata öğesi, kontrol kuralı
+  const alanlar = [
+    {
+      girdi: document.getElementById("ad"),
+      hata: document.getElementById("adHata"),
+      kontrol: (deger) => (deger === "" ? "Lütfen adınızı girin." : ""),
+    },
+    {
+      girdi: document.getElementById("eposta"),
+      hata: document.getElementById("epostaHata"),
+      kontrol: (deger) => {
+        if (deger === "") return "Lütfen e-posta adresinizi girin.";
+        if (!EPOSTA_KALIBI.test(deger)) {
+          return "Lütfen geçerli bir e-posta adresi girin (örnek: ad@ornek.com).";
+        }
+        return "";
+      },
+    },
+    {
+      girdi: document.getElementById("mesaj"),
+      hata: document.getElementById("mesajHata"),
+      kontrol: (deger) => (deger === "" ? "Lütfen mesajınızı yazın." : ""),
+    },
+  ];
+
+  function hataGoster(alan, mesaj) {
+    alan.girdi.setAttribute("aria-invalid", "true");
+    alan.hata.textContent = mesaj;
+  }
+
+  function hataTemizle(alan) {
+    alan.girdi.removeAttribute("aria-invalid");
+    alan.hata.textContent = "";
+  }
+
+  function durumYaz(tur, metin) {
+    durum.className = `form-durumu ${tur}`;
+    durum.textContent = metin;
+  }
+
+  // Kullanıcı yazmaya başlayınca o alanın hatası kalkar
+  alanlar.forEach((alan) => {
+    alan.girdi.addEventListener("input", () => hataTemizle(alan));
+  });
+
+  form.addEventListener("submit", (olay) => {
+    olay.preventDefault(); // Form hiçbir yere gönderilmez
+
+    let ilkHatali = null;
+    let hataSayisi = 0;
+    alanlar.forEach((alan) => {
+      const mesaj = alan.kontrol(alan.girdi.value.trim());
+      if (mesaj) {
+        hataGoster(alan, mesaj);
+        hataSayisi += 1;
+        if (!ilkHatali) ilkHatali = alan.girdi;
+      } else {
+        hataTemizle(alan);
+      }
+    });
+
+    if (ilkHatali) {
+      durumYaz(
+        "hata",
+        `Formda ${hataSayisi} hata var. Lütfen işaretli alanları düzeltin.`
+      );
+      ilkHatali.focus(); // Odak ilk hatalı alana taşınır
+      return;
+    }
+
+    // Dürüst geri bildirim: mesajın gönderilmediği açıkça söylenir.
+    // Ad textContent ile yazılır; girilen metin HTML olarak çalıştırılamaz.
+    const ad = alanlar[0].girdi.value.trim();
+    durumYaz(
+      "basari",
+      `Teşekkürler, ${ad}. Bu site bir portfolyo örneğidir; ` +
+        "mesajınız hiçbir yere gönderilmedi ve kaydedilmedi. " +
+        "Bana ulaşmak için e-posta adresimi kullanabilirsiniz: "
+    );
+    const baglanti = document.createElement("a");
+    baglanti.href = `mailto:${E_POSTA_ADRESI}`;
+    baglanti.textContent = E_POSTA_ADRESI;
+    durum.append(baglanti);
+    form.reset();
+  });
+
+  gonderDugmesi.disabled = false; // JavaScript çalışıyor: formu etkinleştir
+}
+
 // Betik "defer" ile yüklendiği için sayfa hazır; doğrudan başlatılır
 temaKur();
 menuKur();
 filtreKur();
+formKur();
