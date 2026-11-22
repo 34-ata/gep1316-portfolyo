@@ -1,6 +1,8 @@
 # Fatih Mehmet Ata
 
-Ekonomi ile yazılımın kesiştiği yerde çalışan bir öğrenciyim. Bu repo, BAU GEP1316 Kodlama Okuryazarlığı dersindeki çalışmalarımı bir araya getiriyor ve ileride kişisel portfolyo sitemin kaynağı olacak.
+Ekonomi ile yazılımın kesiştiği yerde çalışan bir öğrenciyim. Bu repo, BAU GEP1316 Kodlama Okuryazarlığı dersindeki çalışmalarımı bir araya getiriyor ve kişisel portfolyo sitemin kaynağıdır.
+
+**Canlı site:** [34-ata.github.io/gep1316-portfolyo](https://34-ata.github.io/gep1316-portfolyo/)
 
 ## Hakkımda
 
