@@ -455,6 +455,120 @@ html:not(.js) .tema-dugmesi {
   margin-bottom: 2.5rem;
 }
 
+/* ===== 5c. Projeler sayfası ===== */
+/* hidden özniteliği, display: flex gibi kurallara karşı da geçerli olsun */
+[hidden] {
+  display: none !important;
+}
+
+.filtre {
+  margin: 1.5rem 0 0.5rem;
+}
+
+.filtre-dugmeleri {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filtre-baslik {
+  margin-right: 0.25rem;
+  font-weight: 600;
+}
+
+.filtre-dugmesi {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--kenar);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--metin);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filtre-dugmesi:hover {
+  border-color: var(--vurgu);
+  color: var(--vurgu);
+}
+
+/* Seçili filtre: aria-pressed="true" */
+.filtre-dugmesi[aria-pressed="true"] {
+  border-color: var(--vurgu);
+  background-color: var(--vurgu);
+  color: var(--vurgu-uzeri);
+}
+
+.filtre-sonuc {
+  margin: 0.75rem 0 0;
+  color: var(--soluk);
+  font-size: 0.95rem;
+}
+
+.proje-listesi {
+  display: grid;
+  gap: 1.25rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.proje-karti {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Terminal görüntüleri oranı bozulmadan, koyu zemin üzerinde gösterilir */
+.proje-gorsel {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  background-color: #0c0c0c;
+  border-bottom: 1px solid var(--cizgi);
+}
+
+/* Uzun akış şeması: yalnızca üst kısmı kırpılarak gösterilir */
+.proje-gorsel.gorsel-kirp {
+  object-fit: cover;
+  object-position: top;
+  background-color: #ffffff;
+}
+
+.proje-govde {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+}
+
+.proje-govde > * {
+  margin: 0;
+}
+
+.proje-ust {
+  color: var(--vurgu);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ogrendim {
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--vurgu);
+  border-radius: 0 8px 8px 0;
+  background-color: var(--bg);
+}
+
+/* Bağlantı düğmesi kartın en altına yaslanır */
+.proje-govde .dugme {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
 /* ===== 6. Alt bilgi ===== */
 .site-footer {
   padding: 1.5rem 1.25rem;
@@ -530,6 +644,10 @@ html:not(.js) .tema-dugmesi {
   }
 
   .bilgi-izgara {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .proje-listesi {
     grid-template-columns: repeat(2, 1fr);
   }
 }

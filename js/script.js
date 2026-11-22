@@ -83,6 +83,40 @@ function menuKur() {
   });
 }
 
+// ===== 3. Proje filtreleme (yalnızca projeler sayfasında) =====
+function filtreKur() {
+  const grup = document.getElementById("filtreGrubu");
+  const sonuc = document.getElementById("filtreSonuc");
+  const kartlar = document.querySelectorAll(".proje-karti");
+  if (!grup || !sonuc || kartlar.length === 0) return;
+
+  const dugmeler = grup.querySelectorAll("[data-filtre]");
+
+  // Seçilen etikete uymayan kartları gizler, seçili düğmeyi işaretler
+  // ve görünen kart sayısını ekran okuyuculara da duyurur
+  function uygula(filtre) {
+    let gorunen = 0;
+    kartlar.forEach((kart) => {
+      const etiketler = kart.dataset.etiket.split(" ");
+      const goster = filtre === "tumu" || etiketler.includes(filtre);
+      kart.hidden = !goster;
+      if (goster) gorunen += 1;
+    });
+    dugmeler.forEach((dugme) => {
+      const secili = dugme.dataset.filtre === filtre;
+      dugme.setAttribute("aria-pressed", String(secili));
+    });
+    sonuc.textContent = `${gorunen} proje gösteriliyor.`;
+  }
+
+  dugmeler.forEach((dugme) => {
+    dugme.addEventListener("click", () => uygula(dugme.dataset.filtre));
+  });
+
+  grup.hidden = false; // JavaScript çalışıyor: filtreyi göster
+}
+
 // Betik "defer" ile yüklendiği için sayfa hazır; doğrudan başlatılır
 temaKur();
 menuKur();
+filtreKur();
