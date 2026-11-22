@@ -22,6 +22,8 @@ Ekonomi bana bir işletmenin hangi kararı neden verdiğini anlatıyor; kodlama 
 
 ## Ders Çalışmalarım
 
+- **Haftalık Ödev 1:** Stok yeniden sipariş kontrolü algoritması ve akış şeması → [odev1/](odev1/)
+  - [README.md](odev1/README.md): Problem tanımı, sözde kod ve akış şeması
 - **Ara Değerlendirme Ödevi 1:** Küçük üretim atölyeleri için ürün maliyetini ve satış fiyatını hesaplayıp sonuçları CSV raporuna kaydeden Python programı → [gep1316-odev1](https://github.com/34-ata/gep1316-odev1)
 - **Haftalık Ödev 2:** Kişisel tanıtım ve yaş hesaplayan karşılama programı → [odev2/](odev2/)
   - [merhaba.py](odev2/merhaba.py): Adı ve doğum yılını alıp yaşı hesaplayan, kişiye özel mesaj yazan program
