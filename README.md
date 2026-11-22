@@ -26,3 +26,6 @@ Ekonomi bana bir işletmenin hangi kararı neden verdiğini anlatıyor; kodlama 
 - **Haftalık Ödev 2:** Kişisel tanıtım ve yaş hesaplayan karşılama programı → [odev2/](odev2/)
   - [merhaba.py](odev2/merhaba.py): Adı ve doğum yılını alıp yaşı hesaplayan, kişiye özel mesaj yazan program
   - [PROMPTLAR.md](odev2/PROMPTLAR.md): YZ ile çalışma günlüğü, YZ kullanım beyanı ve kaynakça
+- **Haftalık Ödev 3:** Fisher denklemiyle reel getiri hesaplayıcısı ve hata avı → [odev3/](odev3/)
+  - [hesaplayici.py](odev3/hesaplayici.py): Nominal getiri, enflasyon ve vadeye göre yıllık ve toplam reel getiriyi hesaplayan program
+  - [PROMPTLAR.md](odev3/PROMPTLAR.md): YZ ile çalışma günlüğü, YZ kullanım beyanı ve kaynakça
