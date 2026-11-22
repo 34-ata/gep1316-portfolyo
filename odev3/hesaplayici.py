@@ -52,7 +52,7 @@ def vade_al() -> int:
 # Fisher denkleminin kesin hâli: r = (1 + i) / (1 + π) - 1
 def reel_getiri_hesapla(nominal_oran: float, enflasyon_orani: float) -> float:
     # Nominal büyümeyi enflasyon büyümesine bölüp 1 çıkarıyoruz
-    return (nominal_oran - enflasyon_orani) / (1 + nominal_oran)
+    return (nominal_oran - enflasyon_orani) / (1 + enflasyon_orani)
 
 
 # Yıllık oranı vade boyunca bileşik olarak toplam orana çeviren fonksiyon
