@@ -1,0 +1,3 @@
+# Haftalık Ödev 3 — Reel Getiri Hesaplayıcı
+
+Bu program, kullanıcıdan bir yatırımın adını, yıllık nominal getirisini (%), yıllık enflasyonu (%) ve vadeyi (yıl) alır. Yıllık reel getiriyi Fisher denkleminin kesin hâli olan `r = (1 + i) / (1 + π) − 1` formülüyle hesaplar; burada `i` nominal getiriyi, `π` enflasyonu gösterir. Oranların her yıl sabit kaldığını varsayarak vade boyunca toplam reel getiriyi `(1 + r)ⁿ − 1` ile bulur. Sonuçları yüzde olarak yazdırır ve reel getirinin sıfırdan büyük, küçük ya da sıfıra eşit olmasına göre yatırımın enflasyona karşı değer kazandığını, kaybettiğini ya da koruduğunu söyler.
