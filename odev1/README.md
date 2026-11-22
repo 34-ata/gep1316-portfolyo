@@ -66,4 +66,8 @@ BİTİR
 
 ![Stok yeniden sipariş kontrolü akış şeması](akis_semasi.png)
 
+Şema sözde kodun birebir karşılığıdır; 5 karar kutusunun her birinin Evet ve Hayır çıkışı vardır. Mermaid ile üretilmiştir. Kullanılan standart semboller: oval = başla/bitir, dikdörtgen = işlem, eşkenar dörtgen = karar, paralelkenar = girdi/çıktı.
+
+Sözde koddaki "HER ürün İÇİN" döngüsü, akış şemasında bir sayaçla gösterilmiştir (i = 1 → i ≤ ürün_sayısı? → i = i + 1). Mantık aynıdır; bu gösterim döngünün nerede başlayıp nerede bittiğini görünür kılar.
+
 Akış şeması teslim edilen PDF raporundan alınmıştır. YZ ile karşılaştırma, prompt günlüğü ve YZ kullanım beyanı bu repoda değil, yalnızca teslim edilen PDF raporunda yer almaktadır.
