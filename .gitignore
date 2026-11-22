@@ -1,0 +1,18 @@
+# Python önbellek ve sanal ortam dosyaları
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Editör ayarları
+.vscode/
+.idea/
+.claude/settings.local.json
+
+# İşletim sistemi dosyaları
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Windows'tan WSL'e kopyalanan dosyaların yan dosyaları
+*:Zone.Identifier
