@@ -1,3 +1,7 @@
 # Haftalık Ödev 3 — Reel Getiri Hesaplayıcı
 
 Bu program, kullanıcıdan bir yatırımın adını, yıllık nominal getirisini (%), yıllık enflasyonu (%) ve vadeyi (yıl) alır. Yıllık reel getiriyi Fisher denkleminin kesin hâli olan `r = (1 + i) / (1 + π) − 1` formülüyle hesaplar; burada `i` nominal getiriyi, `π` enflasyonu gösterir. Oranların her yıl sabit kaldığını varsayarak vade boyunca toplam reel getiriyi `(1 + r)ⁿ − 1` ile bulur. Sonuçları yüzde olarak yazdırır ve reel getirinin sıfırdan büyük, küçük ya da sıfıra eşit olmasına göre yatırımın enflasyona karşı değer kazandığını, kaybettiğini ya da koruduğunu söyler.
+
+## Hata Avı
+
+YZ'den programa fark edilmesi zor bir mantık hatası eklemesini ve yerini söylememesini istedim. Hata eklenmeden önce beş test senaryosunun beklenen değerlerini kendim hesapladım. Mevduat senaryosunda (nominal %60, enflasyon %50) yıllık reel getiri %6,67 yerine %6,25 çıktı. Toplam getiri bu yanlış değerle tutarlıydı; bu yüzden hatanın yıllık hesapta olduğunu anladım. En açık işaret enflasyonun sıfır olduğu senaryodaydı: reel getirinin nominale (%10) eşit olması gerekirken %9,09 çıktı. Nominal getiri -%100 girildiğinde ise program ZeroDivisionError ile çöktü ve hata dökümü sorunlu satırı gösterdi. Hata, Fisher formülünün eşdeğer biçimi olan r = (i − π) / (1 + π) ifadesinin paydasındaydı: (1 + π) yerine (1 + i) yazılmıştı. Pay değişmediği için sonucun işareti, dolayısıyla "kazandı/kaybetti" mesajı hep doğru çıkıyordu; hatayı gizleyen de buydu. Paydayı düzelttim ve beş senaryonun hepsi beklenen değerleri verdi.
