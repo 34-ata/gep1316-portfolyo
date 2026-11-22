@@ -2,21 +2,51 @@
 # Fisher denklemiyle bir yatırımın reel getirisini hesaplayan program
 
 
-# Kullanıcıdan bir metin alıp baştaki ve sondaki boşlukları silen fonksiyon
+# Kullanıcıdan boş olmayan bir metin alan fonksiyon
 def metin_al(soru: str) -> str:
-    return input(soru).strip()  # Girilen metni temizleyip geri veriyoruz
+    while True:  # Boş olmayan bir metin girilene kadar soruyu tekrarlıyoruz
+        metin = input(soru).strip()  # Girdiyi okuyup boşlukları siliyoruz
+        if metin:  # Metin boş değilse
+            return metin  # Metni geri veriyoruz
+        print("Uyarı: Bu alan boş bırakılamaz.")  # Boşsa uyarıyoruz
 
 
-# Kullanıcıdan yüzde olarak bir oran alıp float döndüren fonksiyon
-def oran_al(soru: str) -> float:
-    metin = input(soru).strip()  # Girdiyi önce metin olarak okuyoruz
-    return float(metin)  # Metni ondalıklı sayıya (float) çevirip veriyoruz
+# Kullanıcıdan yüzde olarak, sınırlar içinde bir oran alan fonksiyon
+def oran_al(soru: str, alt: float, ust: float, alt_dahil: bool) -> float:
+    while True:  # Geçerli bir sayı girilene kadar soruyu tekrarlıyoruz
+        metin = input(soru).strip()  # Girdiyi önce metin olarak okuyoruz
+        metin = metin.replace(",", ".")  # Virgülü noktaya çeviriyoruz
+        try:  # Sayıya çevirme hata verebileceği için deniyoruz
+            deger = float(metin)  # Metni ondalıklı sayıya (float) çeviriyoruz
+        except ValueError:  # Sayı olmayan ya da boş bir girdi gelirse
+            print("Uyarı: Lütfen bir sayı girin (örnek: 45,5).")  # Uyarıyoruz
+            continue  # Döngünün başına dönüp yeniden soruyoruz
+        if alt_dahil:  # Alt sınır kabul edilen değerlere dahilse
+            gecerli = alt <= deger <= ust  # Alt ve üst sınır dahil kontrol
+        else:  # Alt sınır dahil değilse
+            gecerli = alt < deger <= ust  # Alt sınırdan büyük olmalı
+        if gecerli:  # Değer sınırlar içindeyse
+            return deger  # Değeri geri veriyoruz
+        if alt_dahil:  # Uyarı metnini sınır türüne göre seçiyoruz
+            # Alt sınır dahil olduğunda gösterilecek uyarı
+            print(f"Uyarı: Değer şu aralıkta olmalı: {alt:g} ≤ değer ≤ {ust:g}")
+        else:  # Alt sınır dahil değilse
+            # Alt sınır dahil olmadığında gösterilecek uyarı
+            print(f"Uyarı: Değer şu aralıkta olmalı: {alt:g} < değer ≤ {ust:g}")
 
 
-# Kullanıcıdan vadeyi yıl olarak alıp int döndüren fonksiyon
+# Kullanıcıdan 1-100 yıl arasında bir vade alıp int döndüren fonksiyon
 def vade_al() -> int:
-    metin = input("Vade (yıl): ").strip()  # Vadeyi metin olarak okuyoruz
-    return int(metin)  # Metni tam sayıya (int) çevirip geri veriyoruz
+    while True:  # Geçerli bir vade girilene kadar soruyu tekrarlıyoruz
+        metin = input("Vade (yıl): ").strip()  # Vadeyi metin olarak okuyoruz
+        try:  # Tam sayıya çevirme hata verebileceği için deniyoruz
+            vade = int(metin)  # Metni tam sayıya (int) çeviriyoruz
+        except ValueError:  # Harf, ondalık sayı ya da boş girdi gelirse
+            print("Uyarı: Vade tam sayı olmalı (örnek: 5).")  # Uyarıyoruz
+            continue  # Döngünün başına dönüp yeniden soruyoruz
+        if 1 <= vade <= 100:  # Vade 1 ile 100 yıl arasındaysa
+            return vade  # Vadeyi geri veriyoruz
+        print("Uyarı: Vade 1 ile 100 yıl arasında olmalı.")  # Sınır uyarısı
 
 
 # Fisher denkleminin kesin hâli: r = (1 + i) / (1 + π) - 1
@@ -51,10 +81,10 @@ def durum_mesaji(ad: str, reel_oran: float, deger_kazandi: bool) -> str:
 def main() -> None:  # Programın ana akışını yöneten fonksiyon
     print("=== Reel Getiri Hesaplayıcı ===")  # Başlığı yazdırıyoruz
     yatirim_adi = metin_al("Yatırımın adı: ")  # Yatırımın adını alıyoruz (str)
-    # Yıllık nominal getiriyi yüzde olarak alıyoruz (float)
-    nominal_yuzde = oran_al("Yıllık nominal getiri (%): ")
-    # Yıllık enflasyonu yüzde olarak alıyoruz (float)
-    enflasyon_yuzde = oran_al("Yıllık enflasyon (%): ")
+    # Nominal getiriyi yüzde olarak alıyoruz (float); -100 dahil, en fazla 1000
+    nominal_yuzde = oran_al("Yıllık nominal getiri (%): ", -100.0, 1000.0, True)
+    # Enflasyonu yüzde olarak alıyoruz (float); -50'den büyük, en fazla 1000
+    enflasyon_yuzde = oran_al("Yıllık enflasyon (%): ", -50.0, 1000.0, False)
     vade = vade_al()  # Vadeyi yıl olarak alıyoruz (int)
 
     nominal_oran = nominal_yuzde / 100  # Yüzdeyi ondalık orana çeviriyoruz
@@ -83,4 +113,7 @@ def main() -> None:  # Programın ana akışını yöneten fonksiyon
 
 # Dosya başka bir dosyaya eklenmeden doğrudan çalıştırıldıysa
 if __name__ == "__main__":
-    main()  # Ana fonksiyonu başlatıyoruz
+    try:  # Kullanıcı programı yarıda keserse hata dökümü göstermemek için
+        main()  # Ana fonksiyonu başlatıyoruz
+    except (KeyboardInterrupt, EOFError):  # Ctrl+C ya da Ctrl+D gelirse
+        print("\nProgram sonlandırıldı.")  # Kısa bir kapanış mesajı yazıyoruz
