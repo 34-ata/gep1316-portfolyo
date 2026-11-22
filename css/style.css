@@ -1,0 +1,512 @@
+/* Fatih Mehmet Ata — portfolyo sitesi ortak stil dosyası
+   Mobil öncelikli: temel kurallar telefon içindir, @media kuralları
+   tablet ve masaüstü için genişletir. */
+
+/* ===== 1. Renk paleti ve tema değişkenleri ===== */
+/* Varsayılan: koyu tema (lacivert zemin, turkuaz vurgu) */
+:root {
+  --bg: #0b1426;
+  --yuzey: #13213b;
+  --cizgi: #24365a;        /* dekoratif ayırıcı çizgiler */
+  --kenar: #6b7fa3;        /* form ve düğme kenarları (en az 3:1) */
+  --metin: #e6edf7;
+  --soluk: #a7b4ca;
+  --vurgu: #2dd4bf;
+  --vurgu-hover: #5eead4;
+  --vurgu-uzeri: #0b1426;  /* vurgu zeminli düğmelerdeki yazı */
+  --hata: #fca5a5;
+  --golge: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --yazi: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  --genislik: 1100px;
+  --yaricap: 12px;
+  color-scheme: dark;
+}
+
+/* Açık tema: tema düğmesiyle <html data-theme="light"> olunca */
+:root[data-theme="light"] {
+  --bg: #f5f8fc;
+  --yuzey: #ffffff;
+  --cizgi: #dbe3ee;
+  --kenar: #7c8ba3;
+  --metin: #0f1b33;
+  --soluk: #475569;
+  --vurgu: #0f766e;
+  --vurgu-hover: #115e59;
+  --vurgu-uzeri: #ffffff;
+  --hata: #b91c1c;
+  --golge: 0 10px 30px rgba(15, 27, 51, 0.08);
+  color-scheme: light;
+}
+
+/* ===== 2. Temel kurallar ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 80px; /* yapışkan başlık, hedefin üstünü örtmesin */
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--yazi);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--metin);
+  background-color: var(--bg);
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--genislik);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--vurgu);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--vurgu-hover);
+}
+
+/* Klavyeyle gezinmede her öğede görünür odak çerçevesi (en az 3:1) */
+:focus-visible {
+  outline: 3px solid var(--vurgu);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Ekranda görünmeyen ama ekran okuyucunun okuduğu metin */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* "İçeriğe geç" bağlantısı: yalnızca klavye odağı gelince görünür */
+.atla {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: var(--vurgu);
+  color: var(--vurgu-uzeri);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.atla:focus {
+  top: 1rem;
+}
+
+/* ===== 3. Başlık, menü ve tema düğmesi ===== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--cizgi);
+}
+
+.navbar {
+  position: relative;
+  max-width: var(--genislik);
+  min-height: 64px;
+  margin: 0 auto;
+  padding: 0.5rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-right: auto;
+  color: var(--metin);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-brand img {
+  width: 36px;
+  height: 36px;
+}
+
+.nav-brand:hover {
+  color: var(--vurgu);
+}
+
+/* Simge düğmeleri (menü ve tema): en az 44×44 px dokunma alanı */
+.ikon-dugme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--kenar);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--metin);
+  cursor: pointer;
+}
+
+.ikon-dugme:hover {
+  border-color: var(--vurgu);
+  color: var(--vurgu);
+}
+
+.ikon-dugme svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Tema düğmesi: koyu temada güneş, açık temada ay simgesi */
+.ikon-ay {
+  display: none;
+}
+
+:root[data-theme="light"] .ikon-gunes {
+  display: none;
+}
+
+:root[data-theme="light"] .ikon-ay {
+  display: block;
+}
+
+/* Menü düğmesi: üç çubuk, açıkken çarpıya dönüşür */
+.menu-dugmesi {
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-dugmesi .cubuk {
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.menu-dugmesi[aria-expanded="true"] .cubuk:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-dugmesi[aria-expanded="true"] .cubuk:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-dugmesi[aria-expanded="true"] .cubuk:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* JavaScript yoksa menü ve tema düğmeleri işlevsiz; gizlenir */
+html:not(.js) .menu-dugmesi,
+html:not(.js) .tema-dugmesi {
+  display: none;
+}
+
+/* Menü bağlantıları. JavaScript yoksa menü hep açık bir satır olarak
+   görünür; böylece site JS olmadan da gezilebilir. */
+.nav-menu {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  color: var(--soluk);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--metin);
+}
+
+/* Bulunulan sayfa (aria-current="page") vurgulanır */
+.nav-link[aria-current="page"] {
+  color: var(--vurgu);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+/* JavaScript varken telefonda menü, düğmeyle açılan bir açılır panel */
+.js .nav-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: block;
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--cizgi);
+  box-shadow: var(--golge);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+}
+
+.js .nav-menu.acik {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s;
+}
+
+.js .nav-menu li + li {
+  border-top: 1px solid var(--cizgi);
+}
+
+/* ===== 4. Ortak bileşenler ===== */
+.dugmeler {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.dugme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.6rem 1.25rem;
+  border: 2px solid var(--vurgu);
+  border-radius: 10px;
+  background-color: var(--vurgu);
+  color: var(--vurgu-uzeri);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.dugme:hover {
+  border-color: var(--vurgu-hover);
+  background-color: var(--vurgu-hover);
+  color: var(--vurgu-uzeri);
+}
+
+.dugme-ikincil {
+  background-color: transparent;
+  color: var(--vurgu);
+}
+
+.dugme-ikincil:hover {
+  background-color: transparent;
+  color: var(--vurgu-hover);
+}
+
+.kart {
+  padding: 1.25rem;
+  border: 1px solid var(--cizgi);
+  border-radius: var(--yaricap);
+  background-color: var(--yuzey);
+  box-shadow: var(--golge);
+}
+
+.kart > :last-child {
+  margin-bottom: 0;
+}
+
+/* ===== 5. Ana sayfa ===== */
+.hero {
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1rem 0 3rem;
+}
+
+.hero-avatar {
+  width: 128px;
+  height: 128px;
+}
+
+.ust-baslik {
+  margin-bottom: 0.5rem;
+  color: var(--vurgu);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.giris {
+  max-width: 60ch;
+  color: var(--soluk);
+  font-size: 1.15rem;
+}
+
+.odak-listesi {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ===== 6. Alt bilgi ===== */
+.site-footer {
+  padding: 1.5rem 1.25rem;
+  border-top: 1px solid var(--cizgi);
+  color: var(--soluk);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.footer-baglantilar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1.5rem;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-baglantilar a {
+  display: inline-block;
+  padding: 0.5rem 0.25rem; /* parmakla dokunmaya uygun alan */
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* ===== 7. Tablet (768 px ve üstü) ===== */
+@media (min-width: 768px) {
+  .menu-dugmesi {
+    display: none;
+  }
+
+  /* Menü yatay satıra döner; açılır panel kuralları sıfırlanır */
+  .nav-menu,
+  .js .nav-menu {
+    position: static;
+    display: flex;
+    flex-basis: auto;
+    gap: 0.25rem;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .js .nav-menu li + li {
+    border-top: 0;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+  }
+
+  .hero {
+    grid-template-columns: auto 1fr;
+    gap: 2.5rem;
+    padding: 2rem 0 3.5rem;
+  }
+
+  .hero-avatar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .odak-listesi {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== 8. Masaüstü (1100 px ve üstü) ===== */
+@media (min-width: 1100px) {
+  main {
+    padding-top: 3rem;
+  }
+
+  .hero-avatar {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* ===== 9. Hareket tercihleri ===== */
+/* Yumuşak kaydırma yalnızca kullanıcı hareketi azaltmak istemiyorsa */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Hareketi azalt tercihinde tüm geçiş ve animasyonlar kapanır */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
