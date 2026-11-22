@@ -49,9 +49,9 @@ def vade_al() -> int:
         print("Uyarı: Vade 1 ile 100 yıl arasında olmalı.")  # Sınır uyarısı
 
 
-# Fisher denkleminin kesin hâli: r = (1 + i) / (1 + π) - 1
+# Fisher denkleminin eşdeğer biçimi: r = (i - π) / (1 + π)
 def reel_getiri_hesapla(nominal_oran: float, enflasyon_orani: float) -> float:
-    # Nominal büyümeyi enflasyon büyümesine bölüp 1 çıkarıyoruz
+    # Nominal ile enflasyon farkını (1 + enflasyon) ile bölüyoruz
     return (nominal_oran - enflasyon_orani) / (1 + enflasyon_orani)
 
 
